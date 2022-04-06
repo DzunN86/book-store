@@ -7,11 +7,41 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import {useDispatch, useSelector} from 'react-redux';
 import {Header, Button, Input} from '../../components';
+import {useForm} from '../../hooks';
+import {registerAction} from '../../store/actions';
 import {COLORS} from '../../themes';
+import {showMessage} from '../../utils';
 
 export default function Register({navigation}) {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
+  const {isLoading} = useSelector(state => state.globalReducer);
+  const [form, setForm] = useForm({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    if (form.email === '' || form.email === '' || form.password === '') {
+      let inputName = [];
+      if (!form.name) {
+        inputName.push('name');
+      }
+      if (!form.email) {
+        inputName.push('email');
+      }
+      if (!form.password) {
+        inputName.push('password');
+      }
+      showMessage(`Harap melengkapi ${inputName.join(', ')}`);
+    } else {
+      dispatch(registerAction(form, navigation));
+    }
+  };
   return (
     <ScrollView contentContainerStyle={styles.scroll}>
       <View style={styles.page}>
@@ -26,13 +56,15 @@ export default function Register({navigation}) {
               label="Full Name"
               iconPosition="right"
               placeholder="Full Name"
-              value={null}
+              value={form.name}
+              onChangeText={value => setForm('name', value)}
             />
             <Input
               label="Email"
               iconPosition="right"
               placeholder="Enter Email"
-              value={null}
+              value={form.email}
+              onChangeText={value => setForm('email', value)}
             />
             <Input
               label="Password"
@@ -51,10 +83,17 @@ export default function Register({navigation}) {
                 </TouchableOpacity>
               }
               placeholder="Enter Password"
-              value={null}
+              value={form.password}
+              onChangeText={value => setForm('password', value)}
             />
 
-            <Button primary title="Register" />
+            <Button
+              primary
+              title="Register"
+              onPress={onSubmit}
+              loading={isLoading}
+              disabled={isLoading}
+            />
 
             <View style={styles.createSection}>
               <Text style={styles.infoText}>Already have an account?</Text>
