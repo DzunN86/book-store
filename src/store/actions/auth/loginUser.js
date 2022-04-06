@@ -1,7 +1,7 @@
-import Axios from '../../services/axios';
-import {showMessage} from '../../utils';
-import {SET_PROFILE, SET_TOKEN} from '../types';
-import {setLoading} from './global';
+import Axios from '../../../services/axios';
+import {showMessage} from '../../../utils';
+import {SET_PROFILE, SET_TOKEN} from '../../types';
+import {setLoading} from '../common';
 
 export const setToken = value => ({
   type: SET_TOKEN,
