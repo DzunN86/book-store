@@ -1,11 +1,25 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
+import FlashMessage from 'react-native-flash-message';
+import {Provider} from 'react-redux';
 import Navigation from './navigation';
+import {Store} from './store';
 
-export default function App() {
+const MainApp = () => {
   return (
     <NavigationContainer>
       <Navigation />
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
-}
+};
+
+const App = () => {
+  return (
+    <Provider store={Store}>
+      <MainApp />
+    </Provider>
+  );
+};
+
+export default App;
