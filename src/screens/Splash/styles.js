@@ -10,6 +10,13 @@ export default StyleSheet.create({
   logoText: {
     ...FONTS.h1,
     color: COLORS.white,
-    marginTop: 29.1,
+    marginTop: 20,
+  },
+  copyright: {
+    ...FONTS.body4,
+    color: COLORS.white,
+    position: 'absolute',
+    bottom: 19,
+    letterSpacing: 7,
   },
 });

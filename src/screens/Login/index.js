@@ -137,16 +137,17 @@ const styles = StyleSheet.create({
   },
   createSection: {
     marginTop: 15,
-    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // flexDirection: 'row',
   },
   linkBtn: {
-    paddingLeft: 17,
+    marginTop: 7,
     color: COLORS.primary,
-    fontSize: 16,
-    fontWeight: '500',
+    ...FONTS.h3,
   },
 
   infoText: {
-    fontSize: 17,
+    ...FONTS.body3,
   },
 });
