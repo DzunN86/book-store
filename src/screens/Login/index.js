@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Button, Input} from '../../components';
 import {useForm} from '../../hooks';
 import {loginAction} from '../../store/actions';
-import {COLORS, images} from '../../themes';
+import {COLORS, FONTS, images} from '../../themes';
 import {showMessage} from '../../utils';
 
 export default function Login({navigation}) {
@@ -36,12 +36,12 @@ export default function Login({navigation}) {
       }
       showMessage(`Harap melengkapi ${inputName.join(' dan ')}`);
     } else {
-      dispatch(loginAction(form, navigation));
+      dispatch(loginAction(form));
     }
   };
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scroll}>
       <View style={styles.container}>
         <Image
           height={70}
@@ -106,9 +106,11 @@ export default function Login({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  scroll: {flexGrow: 1, backgroundColor: COLORS.white},
   container: {
-    padding: 20,
+    padding: 24,
     flex: 1,
+    backgroundColor: COLORS.white,
   },
   logoImage: {
     height: 150,
@@ -117,10 +119,10 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   title: {
-    fontSize: 21,
+    ...FONTS.h2,
     textAlign: 'center',
     paddingTop: 20,
-    fontWeight: '500',
+    color: COLORS.black,
   },
 
   subTitle: {

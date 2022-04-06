@@ -1,4 +1,4 @@
-import {SET_TOKEN, SET_PROFILE} from '../types';
+import {SET_TOKEN, SET_PROFILE, LOGOUT_USER} from '../types';
 
 const initAuthState = {
   token: null,
@@ -16,6 +16,11 @@ export const authReducer = (state = initAuthState, action) => {
       return {
         ...state,
         profile: action.payload,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        token: null,
       };
     default:
       return state;

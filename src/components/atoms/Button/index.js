@@ -36,7 +36,7 @@ const Button = ({
       style={[styles.wrapper, {backgroundColor: getBgColor()}, style]}>
       <View style={[styles.loaderSection]}>
         {loading && (
-          <ActivityIndicator color={primary ? COLORS.white : COLORS.primary} />
+          <ActivityIndicator color={primary ? COLORS.black : COLORS.primary} />
         )}
         {title && (
           <Text

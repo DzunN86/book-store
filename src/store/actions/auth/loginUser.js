@@ -13,18 +13,21 @@ export const setProfile = value => ({
   payload: value,
 });
 
-export const loginAction = (form, navigation) => async dispatch => {
+export const loginAction = form => async dispatch => {
+  dispatch(setLoading(true));
   try {
-    dispatch(setLoading(true));
     await Axios.post('/auth/login', form).then(res => {
       dispatch(setToken(res.data.tokens.access.token));
       dispatch(setProfile(res.data.user));
       dispatch(setLoading(false));
-      navigation.reset({index: 0, routes: [{name: 'HomeScreen'}]});
     });
   } catch (error) {
     dispatch(setLoading(false));
-    showMessage(error?.response?.data?.message);
+    showMessage(
+      error?.response
+        ? error?.response?.data?.message
+        : 'Something went wrong, try agin',
+    );
     console.log(error);
   }
 };

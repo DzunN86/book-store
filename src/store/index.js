@@ -4,14 +4,14 @@ import reduxLogger from 'redux-logger';
 import {persistReducer, persistStore} from 'redux-persist';
 import ReduxThunk from 'redux-thunk';
 
-import reducers from './reducers';
+import Reducers from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
 };
 
-const configPersist = persistReducer(persistConfig, reducers);
+const configPersist = persistReducer(persistConfig, Reducers);
 
 export const Store = createStore(
   configPersist,
