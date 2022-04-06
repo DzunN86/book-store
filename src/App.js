@@ -9,7 +9,7 @@ const MainApp = () => {
   return (
     <NavigationContainer>
       <Navigation />
-      <FlashMessage position="top" />
+      <FlashMessage position="bottom" />
     </NavigationContainer>
   );
 };

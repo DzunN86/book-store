@@ -1,18 +1,45 @@
+import React, {useState} from 'react';
 import {
+  Image,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
-  ScrollView,
-  Image,
+  View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {Button, Input} from '../../components';
-import {COLORS, images} from '../../themes';
 import Icon from 'react-native-vector-icons/Feather';
+import {useDispatch, useSelector} from 'react-redux';
+import {Button, Input} from '../../components';
+import {useForm} from '../../hooks';
+import {loginAction} from '../../store/actions';
+import {COLORS, images} from '../../themes';
+import {showMessage} from '../../utils';
 
 export default function Login({navigation}) {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
+  const {isLoading} = useSelector(state => state.globalReducer);
+  const [form, setForm] = useForm({
+    email: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+
+  const onSubmit = () => {
+    if (form.email === '' || form.password === '') {
+      let inputName = [];
+      if (!form.email) {
+        inputName.push('email');
+      }
+      if (!form.password) {
+        inputName.push('password');
+      }
+      showMessage(`Harap melengkapi ${inputName.join(' dan ')}`);
+    } else {
+      dispatch(loginAction(form, navigation));
+    }
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -30,12 +57,15 @@ export default function Login({navigation}) {
               label="Email"
               iconPosition="right"
               placeholder="Enter Email"
-              value={null}
+              value={form.email}
+              onChangeText={value => setForm('email', value)}
             />
             <Input
               label="Password"
               iconPosition="right"
               secureTextEntry={isSecureEntry}
+              value={form.password}
+              onChangeText={value => setForm('password', value)}
               icon={
                 <TouchableOpacity
                   onPress={() => {
@@ -49,10 +79,15 @@ export default function Login({navigation}) {
                 </TouchableOpacity>
               }
               placeholder="Enter Password"
-              value={null}
             />
 
-            <Button primary title="Login" />
+            <Button
+              primary
+              title="Login"
+              onPress={onSubmit}
+              loading={isLoading}
+              disabled={isLoading}
+            />
 
             <View style={styles.createSection}>
               <Text style={styles.infoText}>Dont have an account?</Text>
