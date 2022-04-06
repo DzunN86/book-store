@@ -1,0 +1,16 @@
+{
+  "exclude": [
+    "node_modules",
+    "ios",
+    "android",
+    "build",
+    "dist",
+    "docs",
+    "examples",
+    "scripts",
+    "test",
+    "typings",
+    "web",
+    "yarn.lock"
+  ]
+}
