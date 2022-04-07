@@ -21,6 +21,7 @@ export const authReducer = (state = initAuthState, action) => {
       return {
         ...state,
         token: null,
+        profile: null,
       };
     default:
       return state;
