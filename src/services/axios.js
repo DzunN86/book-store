@@ -35,7 +35,7 @@ instance.interceptors.response.use(
     }
 
     if (error.response.status === 403) {
-      console.log('403');
+      Store.dispatch({type: 'LOGOUT_USER'});
     } else {
       return new Promise((resolve, reject) => {
         reject(error);

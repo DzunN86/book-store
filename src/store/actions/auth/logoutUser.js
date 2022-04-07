@@ -1,6 +1,6 @@
 import {LOGOUT_USER} from '../../types';
 
-export const logout = navigation => dispatch => {
+export const logout = () => dispatch => {
   dispatch({
     type: LOGOUT_USER,
   });
