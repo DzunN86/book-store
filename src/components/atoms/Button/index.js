@@ -13,6 +13,7 @@ const Button = ({
   loading,
   onPress,
   style,
+  icon,
 }) => {
   const getBgColor = () => {
     if (disabled) {
@@ -38,6 +39,7 @@ const Button = ({
         {loading && (
           <ActivityIndicator color={primary ? COLORS.black : COLORS.primary} />
         )}
+        {icon}
         {title && (
           <Text
             style={{
