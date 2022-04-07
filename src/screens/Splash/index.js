@@ -13,13 +13,14 @@ export default function Splash({navigation}) {
       } else {
         navigation.replace('LoginScreen');
       }
-    }, 2000);
+    }, 3000);
   });
 
   return (
     <View style={styles.container}>
       <Image source={images.Logo} />
-      <Text style={styles.logoText}>Book Store</Text>
+      <Text style={styles.logoText}>BOOK STR♥RE</Text>
+      <Text style={styles.copyright}>Dzun Nurroin</Text>
     </View>
   );
 }
