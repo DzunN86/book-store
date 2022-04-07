@@ -10,3 +10,8 @@ export const SET_LOADING = '@SET_LOADING';
 export const SET_NETINFO = '@SET_NETINFO';
 
 export const SET_REFRESH = '@SET_REFRESH';
+
+export const SET_BOOKS = '@@SET_BOOKS';
+export const LOADING_BOOK = '@@LOADING_BOOK';
+export const SET_ERROR = '@@SET_ERROR';
+export const REFRESH_BOOK = '@@REFRESH_BOOK';
