@@ -7,12 +7,11 @@ export const registerAction = (form, navigation) => async dispatch => {
     dispatch(setLoading(true));
     await Axios.post('/auth/register', form).then(res => {
       dispatch(setLoading(false));
-      showMessage(res.data.message, 'success');
       navigation.navigate('RegisSuccessScreen');
     });
-  } catch (error) {
+  } catch (err) {
     dispatch(setLoading(false));
-    showMessage(error?.response?.data?.message);
-    console.log(error);
+    showMessage(err.message ? err.message : 'Something went wrong, try agin');
+    console.log(err.message);
   }
 };
