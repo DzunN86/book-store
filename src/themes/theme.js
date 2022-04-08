@@ -25,6 +25,8 @@ export const COLORS = {
   lightBlue: '#424BAF',
   darkGreen: '#213432',
   lightGreen: '#31Ad66',
+
+  transparent: 'rgba(30, 27, 38, 0.9)',
 };
 
 export const SIZES = {

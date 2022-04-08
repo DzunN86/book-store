@@ -4,6 +4,7 @@ export const theTinyDragon = require('../assets/images/the_tiny_dragon.jpg');
 export const underland = require('../assets/images/underland.jpg');
 export const Logo = require('../assets/images/logo.png');
 export const SuccesRegis = require('../assets/images/success-register.png');
+export const WentWrong = require('../assets/images/goes-error.png');
 
 export default {
   otherWordsForHome,
@@ -12,4 +13,5 @@ export default {
   underland,
   Logo,
   SuccesRegis,
+  WentWrong,
 };
