@@ -1,18 +1,13 @@
 import React, {useState} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch, useSelector} from 'react-redux';
-import {Header, Button, Input} from '../../components';
+import {Button, Header, Input} from '../../components';
 import {useForm} from '../../hooks';
 import {registerAction} from '../../store/actions';
 import {COLORS} from '../../themes';
 import {showMessage} from '../../utils';
+import styles from './styles';
 
 export default function Register({navigation}) {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
@@ -29,13 +24,13 @@ export default function Register({navigation}) {
     if (form.email === '' || form.email === '' || form.password === '') {
       let inputName = [];
       if (!form.name) {
-        inputName.push('name');
+        inputName.push('Full Name');
       }
       if (!form.email) {
-        inputName.push('email');
+        inputName.push('Email');
       }
       if (!form.password) {
-        inputName.push('password');
+        inputName.push('Password');
       }
       showMessage(`Harap melengkapi ${inputName.join(', ')}`);
     } else {
@@ -47,7 +42,7 @@ export default function Register({navigation}) {
       <View style={styles.page}>
         <Header
           title="Register"
-          subTitle="Register and eat"
+          subTitle="Register and reading"
           onBack={() => navigation.goBack()}
         />
         <View style={styles.container}>
@@ -110,48 +105,3 @@ export default function Register({navigation}) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  scroll: {flexGrow: 1, backgroundColor: COLORS.lightGray2},
-  page: {flex: 1},
-  container: {
-    backgroundColor: 'white',
-    paddingHorizontal: 24,
-    paddingVertical: 26,
-    marginTop: 15,
-    flex: 1,
-  },
-  logoImage: {
-    height: 150,
-    width: 150,
-    alignSelf: 'center',
-    marginTop: 50,
-  },
-  title: {
-    fontSize: 21,
-    textAlign: 'center',
-    paddingTop: 20,
-    fontWeight: '500',
-  },
-
-  subTitle: {
-    fontSize: 17,
-    textAlign: 'center',
-    paddingVertical: 20,
-    fontWeight: '500',
-  },
-  createSection: {
-    marginTop: 15,
-    flexDirection: 'row',
-  },
-  linkBtn: {
-    paddingLeft: 17,
-    color: COLORS.primary,
-    fontSize: 16,
-    fontWeight: '500',
-  },
-
-  infoText: {
-    fontSize: 17,
-  },
-});
