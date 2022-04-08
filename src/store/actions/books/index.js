@@ -1,20 +1,10 @@
 import Axios from '../../../services/axios';
 import {showMessage} from '../../../utils';
-
-import {
-  SET_BOOKS,
-  LOADING_BOOK,
-  SET_ERROR,
-  REFRESH_BOOK,
-  SET_DETAIL_BOOK,
-} from '../../types';
+import {LOADING_BOOK, SET_BOOKS, SET_DETAIL_BOOK, SET_ERROR} from '../../types';
 
 export const saveBookPopular = data => ({
   type: SET_BOOKS,
   payload: data,
-});
-export const refreshBook = () => ({
-  type: REFRESH_BOOK,
 });
 export const detailBook = data => ({
   type: SET_DETAIL_BOOK,
