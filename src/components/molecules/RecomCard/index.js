@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import {COLORS, FONTS, icons, SIZES} from '../../../themes';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {COLORS, FONTS, SIZES} from '../../../themes';
 
 export default function RecomCard({index, item, navigation}) {
   return (
@@ -16,47 +16,31 @@ export default function RecomCard({index, item, navigation}) {
       <Image
         source={{uri: item.cover_image}}
         resizeMode="cover"
-        style={{
-          width: 180,
-          height: 250,
-          borderRadius: 20,
-        }}
+        style={styles.coverImg}
       />
 
       {/* Book Info */}
-      <View
-        style={{
-          marginTop: SIZES.radius,
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-        <Image
-          source={icons.clock_icon}
-          style={{
-            width: 20,
-            height: 20,
-            tintColor: COLORS.lightGray,
-          }}
-        />
-        <Text style={{marginLeft: 5, ...FONTS.body3, color: COLORS.lightGray}}>
-          {item.average_rating}
-        </Text>
-
-        <Image
-          source={icons.page_icon}
-          style={{
-            marginLeft: SIZES.radius,
-            width: 20,
-            height: 20,
-            tintColor: COLORS.lightGray,
-          }}
-        />
-        <Text style={{marginLeft: 5, ...FONTS.body3, color: COLORS.lightGray}}>
-          {item.price}
-        </Text>
+      <View style={styles.wrapperInfo}>
+        <Text style={styles.bookName}>{item.title}</Text>
       </View>
     </TouchableOpacity>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  coverImg: {
+    width: 180,
+    height: 250,
+    borderRadius: 20,
+  },
+  wrapperInfo: {
+    marginTop: SIZES.radius,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bookName: {
+    marginLeft: 5,
+    ...FONTS.h3,
+    color: COLORS.lightGray2,
+  },
+});
