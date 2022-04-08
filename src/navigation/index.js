@@ -30,7 +30,7 @@ function MainNavigator() {
     <Stack.Navigator
       initialRouteName={'SplashScreen'}
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="SplashScreen" component={Splash} />
+      {/* <Stack.Screen name="SplashScreen" component={Splash} /> */}
       <Stack.Screen name="HomeScreen" component={Home} />
       <Stack.Screen name="BookDetailScreen" component={BookDetail} />
     </Stack.Navigator>
