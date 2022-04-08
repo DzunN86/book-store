@@ -21,13 +21,9 @@ export const loginAction = form => async dispatch => {
       dispatch(setProfile(res.data.user));
       dispatch(setLoading(false));
     });
-  } catch (error) {
+  } catch (err) {
     dispatch(setLoading(false));
-    showMessage(
-      error?.response
-        ? error?.response?.data?.message
-        : 'Something went wrong, try agin',
-    );
-    console.log(error);
+    showMessage(err.message ? err.message : 'Something went wrong, try agin');
+    console.log(err.message);
   }
 };
