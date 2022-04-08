@@ -1,29 +1,58 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {BookDesc, BookInfo, BottomButton} from '../../components';
+import React, {useEffect} from 'react';
+import {StyleSheet, View, Text} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {BookDesc, BookInfo, BottomButton, Loading} from '../../components';
+import {fetchDetailBook} from '../../store/actions';
 import {COLORS} from '../../themes';
 
 export default function BookDetail({navigation, route}) {
   const {id} = route.params;
 
+  const dispatch = useDispatch();
+
+  const {detailBook, isRefreshing, isLoading} = useSelector(
+    state => state.bookReducer,
+  );
+  useEffect(() => {
+    dispatch(fetchDetailBook(id));
+  }, [dispatch, id]);
+
+  if (!detailBook) {
+    return;
+  }
+
   return (
-    <View style={styles.container}>
-      {/* Book Cover Section */}
-      <View style={{flex: 4}}>
-        <BookInfo navigation={() => navigation.goBack()} />
-      </View>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <View style={styles.container}>
+          {/* Book Cover Section */}
+          <View style={{flex: 4}}>
+            <BookInfo
+              title={detailBook.title}
+              author={detailBook.author}
+              coverImage={detailBook.cover_image}
+              rating={detailBook.average_rating}
+              publisher={detailBook.publisher}
+              totalSale={detailBook.total_sale}
+              navigation={() => navigation.goBack()}
+            />
+          </View>
 
-      {/* Description */}
-      <View style={{flex: 2}}>
-        <BookDesc />
-      </View>
+          {/* Description */}
+          <View style={{flex: 2}}>
+            <BookDesc synopsis={detailBook.synopsis} />
+          </View>
 
-      {/* Buttons */}
-      <View style={styles.btnBottom}>
-        <BottomButton />
-      </View>
-    </View>
+          {/* Buttons */}
+          <View style={styles.btnBottom}>
+            <BottomButton price={detailBook.price} />
+          </View>
+        </View>
+      )}
+    </>
   );
 }
 
