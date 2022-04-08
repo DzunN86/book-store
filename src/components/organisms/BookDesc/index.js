@@ -3,7 +3,7 @@ import {StyleSheet, Text, Animated, View, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS, FONTS, SIZES} from '../../../themes';
 
-export default function BookDesc() {
+export default function BookDesc({synopsis}) {
   const [scrollViewWholeHeight, setScrollViewWholeHeight] = useState(1);
   const [scrollViewVisibleHeight, setScrollViewVisibleHeight] = useState(0);
 
@@ -77,10 +77,7 @@ export default function BookDesc() {
             color: COLORS.lightGray3,
             textAlign: 'justify',
           }}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
-          possimus dolorem rerum, distinctio mollitia error, tempora, veniam
-          nihil fugit vero doloribus libero laborum atque! Eum porro ab ut
-          voluptate illo!
+          {synopsis}
         </Text>
       </ScrollView>
     </View>

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   StyleSheet,
   Text,
@@ -9,12 +10,22 @@ import {
 import React from 'react';
 import {COLORS, FONTS, icons, images, SIZES} from '../../../themes';
 import {LineDivider} from '../../atoms';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-export default function BookInfo({navigation, title, author, rating, price}) {
+export default function BookInfo({
+  navigation,
+  title,
+  author,
+  rating,
+  price,
+  publisher,
+  coverImage,
+  totalSale,
+}) {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={images.theMetropolist}
+        source={{uri: coverImage}}
         resizeMode="cover"
         style={styles.floatImg}
       />
@@ -50,7 +61,7 @@ export default function BookInfo({navigation, title, author, rating, price}) {
       {/* Book Cover */}
       <View style={styles.bookCover}>
         <Image
-          source={images.theMetropolist}
+          source={{uri: coverImage}}
           resizeMode="contain"
           style={styles.imgCover}
         />
@@ -58,42 +69,46 @@ export default function BookInfo({navigation, title, author, rating, price}) {
 
       {/* Book Name and Author */}
       <View style={styles.booktitle}>
-        <Text style={{...FONTS.h2, color: COLORS.white}}>
-          {'Book Title dah oke'}
+        <Text style={{...FONTS.h2, color: COLORS.white, textAlign: 'center'}}>
+          {title}
         </Text>
-        <Text style={{...FONTS.body3, color: COLORS.white}}>
-          {'book.author'}
-        </Text>
+        <Text style={{...FONTS.body3, color: COLORS.lightGray3}}>{author}</Text>
       </View>
 
       {/* Book Info */}
       <View style={styles.bookInfo}>
-        {/* Rating */}
-        <View style={styles.rating}>
-          <Text style={{...FONTS.h3, color: COLORS.white}}>
-            {'book.rating'}
-          </Text>
-          <Text style={{...FONTS.body4, color: COLORS.white}}>Rating</Text>
-        </View>
-
-        <LineDivider />
-
         {/* Pages */}
         <View style={styles.page}>
-          <Text style={{...FONTS.h3, color: COLORS.white}}>
-            {'book.pageNo'}
-          </Text>
-          <Text style={{...FONTS.body4, color: COLORS.white}}>
-            Number of Page
+          <Text style={{...FONTS.h3, color: COLORS.white}}>{publisher}</Text>
+          <Text style={{...FONTS.body4, color: COLORS.lightGray3}}>
+            Publisher
           </Text>
         </View>
 
         <LineDivider />
 
-        {/* Language */}
-        <View style={styles.language}>
-          <Text style={{...FONTS.h3, color: COLORS.white}}>{'book.lan'}</Text>
-          <Text style={{...FONTS.body4, color: COLORS.white}}>Language</Text>
+        {/* Rating */}
+        <View style={styles.rating}>
+          <View style={styles.wrapperRating}>
+            <Icon
+              name="star"
+              size={15}
+              style={{marginRight: 5}}
+              color={COLORS.rating}
+            />
+            <Text style={{...FONTS.h3, color: COLORS.white}}>{rating}</Text>
+          </View>
+          <Text style={{...FONTS.body4, color: COLORS.lightGray3}}>Rating</Text>
+        </View>
+
+        <LineDivider />
+
+        {/* totalSale */}
+        <View style={styles.totalSale}>
+          <Text style={{...FONTS.h3, color: COLORS.white}}>{totalSale}</Text>
+          <Text style={{...FONTS.body4, color: COLORS.lightGray3}}>
+            Total Sale
+          </Text>
         </View>
       </View>
     </View>
@@ -120,7 +135,7 @@ const styles = StyleSheet.create({
   navigation: {
     flexDirection: 'row',
     paddingHorizontal: SIZES.radius,
-    height: 80,
+    height: 45,
     alignItems: 'flex-end',
   },
   iconBack: {
@@ -145,7 +160,7 @@ const styles = StyleSheet.create({
     flex: 1.8,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 5,
+    marginTop: 10,
   },
   bookInfo: {
     flexDirection: 'row',
@@ -155,10 +170,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.3)',
   },
   rating: {flex: 1, alignItems: 'center'},
+  wrapperRating: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   page: {
     flex: 1,
     paddingHorizontal: SIZES.radius,
     alignItems: 'center',
   },
-  language: {flex: 1, alignItems: 'center'},
+  totalSale: {flex: 1, alignItems: 'center'},
 });

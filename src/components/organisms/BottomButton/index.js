@@ -1,26 +1,24 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import {COLORS, FONTS, icons, SIZES} from '../../../themes';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {COLORS, FONTS, SIZES} from '../../../themes';
 
-export default function BottomButton() {
+export default function BottomButton({price}) {
+  const hargaConvert = `Rp. ${parseFloat(price).toLocaleString('id-ID')}`;
   return (
     <View style={styles.container}>
       {/* Bookmark */}
       <TouchableOpacity
         style={styles.bookmarkBtn}
         onPress={() => console.log('Bookmark')}>
-        <Image
-          source={icons.bookmark_icon}
-          resizeMode="contain"
-          style={styles.bookmarkIcon}
-        />
+        <Icon name="hearto" size={25} color={COLORS.danger} />
       </TouchableOpacity>
 
       {/* Start Reading */}
       <TouchableOpacity
         style={styles.startReadingBtn}
         onPress={() => console.log('Start Reading')}>
-        <Text style={styles.TextBtn}>Start Reading</Text>
+        <Text style={styles.TextBtn}>Buy {hargaConvert}</Text>
       </TouchableOpacity>
     </View>
   );
