@@ -1,7 +1,14 @@
-import {SET_BOOKS, LOADING_BOOK, SET_ERROR, REFRESH_BOOK} from '../types';
+import {
+  SET_BOOKS,
+  LOADING_BOOK,
+  SET_ERROR,
+  REFRESH_BOOK,
+  SET_DETAIL_BOOK,
+} from '../types';
 
 const initBookState = {
   books: [],
+  detailBook: {},
   isLoading: false,
   ErrorMessage: null,
   isRefreshing: false,
@@ -13,6 +20,13 @@ export const bookReducer = (state = initBookState, action) => {
       return {
         ...state,
         books: action.payload,
+        isLoading: false,
+        isRefreshing: false,
+      };
+    case SET_DETAIL_BOOK:
+      return {
+        ...state,
+        detailBook: action.payload,
         isLoading: false,
         isRefreshing: false,
       };
