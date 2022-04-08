@@ -4,6 +4,7 @@ import {
   SET_ERROR,
   REFRESH_BOOK,
   SET_DETAIL_BOOK,
+  REMOVE_BOOK,
 } from '../types';
 
 const initBookState = {
@@ -46,6 +47,12 @@ export const bookReducer = (state = initBookState, action) => {
       return {
         ...state,
         isRefreshing: true,
+      };
+    case REMOVE_BOOK:
+      return {
+        ...state,
+        books: [],
+        detailBook: {},
       };
     default:
       return state;
