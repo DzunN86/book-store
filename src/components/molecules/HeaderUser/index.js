@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '../../../store/actions';
 import {COLORS, FONTS, SIZES} from '../../../themes';
 import {Button} from '../../atoms';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const HeaderUser = () => {
   const {profile} = useSelector(state => state.authReducer);
@@ -21,7 +21,9 @@ const HeaderUser = () => {
       <View style={styles.secGreeting}>
         <View style={styles.greetingWrapper}>
           <Text style={styles.greetingText}>Good Morning</Text>
-          <Text style={styles.textName}>{profile.name}</Text>
+          <Text style={styles.textName}>
+            {profile ? profile.name : 'Hindun'}
+          </Text>
         </View>
       </View>
 
@@ -31,7 +33,7 @@ const HeaderUser = () => {
         onPress={onLogout}
         icon={
           <Icon
-            name="eye"
+            name="logout"
             size={24}
             style={{marginRight: 5}}
             color={COLORS.white}
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
   secGreeting: {flex: 1},
   greetingWrapper: {marginRight: SIZES.padding},
   greetingText: {...FONTS.body4, color: COLORS.white},
-  textName: {...FONTS.h3, color: COLORS.white},
+  textName: {...FONTS.h2, color: COLORS.white},
   pointBtn: {
     backgroundColor: COLORS.primary,
     height: 40,
