@@ -10,6 +10,8 @@ export const COLORS = {
   danger: '#f72585',
   success: '#31Ad66',
 
+  rating: '#FFCE31',
+
   // colors
   black: '#1E1B26',
   white: '#FFFFFF',
