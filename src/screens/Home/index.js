@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
 import {
   ActivityIndicator,
@@ -28,16 +29,6 @@ export default function Home({navigation}) {
     dispatch(fetchBook());
     dispatch(fetchBookPop());
   }, [dispatch]);
-
-  function latestSort(a, b) {
-    return (
-      new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
-    );
-  }
-
-  function AverageRatingSort(a, b) {
-    return parseFloat(b.average_rating) - parseFloat(a.average_rating);
-  }
 
   const onRefresh = () => {
     dispatch({type: REFRESH_BOOK});
