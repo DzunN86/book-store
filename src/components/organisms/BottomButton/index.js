@@ -2,15 +2,28 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {COLORS, FONTS, SIZES} from '../../../themes';
+import {
+  buatChannel,
+  cancelAllLocalNotifications,
+  configure,
+  kirimNotifikasi,
+} from '../../../utils';
 
-export default function BottomButton({price}) {
+export default function BottomButton({price, bookTitle}) {
   const hargaConvert = `Rp. ${parseFloat(price).toLocaleString('id-ID')}`;
+
+  const notification = () => {
+    configure();
+    buatChannel('1');
+    cancelAllLocalNotifications();
+    kirimNotifikasi('1', `You Love ${bookTitle}`, 'Terima Kasih');
+  };
   return (
     <View style={styles.container}>
       {/* Bookmark */}
       <TouchableOpacity
         style={styles.bookmarkBtn}
-        onPress={() => console.log('Bookmark')}>
+        onPress={() => notification()}>
         <Icon name="hearto" size={25} color={COLORS.danger} />
       </TouchableOpacity>
 

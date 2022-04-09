@@ -20,9 +20,9 @@ export default function RecomCard({index, item, navigation}) {
       />
 
       {/* Book Info */}
-      <View style={styles.wrapperInfo}>
+      {/* <View style={styles.wrapperInfo}>
         <Text style={styles.bookName}>{item.title}</Text>
-      </View>
+      </View> */}
     </TouchableOpacity>
   );
 }

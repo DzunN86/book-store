@@ -1,16 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {
+  Image,
+  ImageBackground,
   StyleSheet,
   Text,
-  View,
-  ImageBackground,
   TouchableOpacity,
-  Image,
+  View,
 } from 'react-native';
-import React from 'react';
-import {COLORS, FONTS, icons, images, SIZES} from '../../../themes';
-import {LineDivider} from '../../atoms';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Share from 'react-native-share';
+import {COLORS, FONTS, icons, SIZES} from '../../../themes';
+import {showMessage} from '../../../utils';
+import {LineDivider} from '../../atoms';
 
 export default function BookInfo({
   navigation,
@@ -22,6 +24,17 @@ export default function BookInfo({
   coverImage,
   totalSale,
 }) {
+  async function myCustomShare() {
+    const shareOptions = {
+      message: `Apakah kamu tertarik dengan buku ${title} dengan rating ${rating}/10 `,
+    };
+
+    try {
+      await Share.open(shareOptions);
+    } catch (error) {
+      showMessage(error.message);
+    }
+  }
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -49,11 +62,12 @@ export default function BookInfo({
 
         <TouchableOpacity
           style={{marginRigth: SIZES.base}}
-          onPress={() => console.log('Click More')}>
-          <Image
-            source={icons.more_icon}
-            resizeMode="contain"
-            style={styles.iconMore}
+          onPress={() => myCustomShare()}>
+          <Icon
+            name="sharealt"
+            size={25}
+            style={{marginRight: 5}}
+            color={COLORS.primary}
           />
         </TouchableOpacity>
       </View>
