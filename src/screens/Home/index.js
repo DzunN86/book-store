@@ -28,6 +28,16 @@ export default function Home({navigation}) {
     dispatch(fetchBook());
   }, [dispatch]);
 
+  function latestSort(a, b) {
+    return (
+      new Date(b.release_date).getTime() - new Date(a.release_date).getTime()
+    );
+  }
+
+  function AverageRatingSort(a, b) {
+    return parseFloat(b.average_rating) - parseFloat(a.average_rating);
+  }
+
   const onRefresh = () => {
     dispatch({type: REFRESH_BOOK});
     dispatch(fetchBook());
@@ -94,7 +104,7 @@ export default function Home({navigation}) {
           </View>
           {/* Books */}
           <View style={styles.listPopuler}>
-            {books.map((item, index) => {
+            {books.sort(AverageRatingSort).map((item, index) => {
               return (
                 <PopularCard
                   item={item}
