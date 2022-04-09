@@ -1,19 +1,13 @@
 import React, {useState} from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Input} from '../../components';
 import {useForm} from '../../hooks';
 import {loginAction} from '../../store/actions';
-import {COLORS, FONTS, images} from '../../themes';
+import {COLORS, images} from '../../themes';
 import {showMessage} from '../../utils';
+import styles from './styles';
 
 export default function Login({navigation}) {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
@@ -104,50 +98,3 @@ export default function Login({navigation}) {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  scroll: {flexGrow: 1, backgroundColor: COLORS.white},
-  container: {
-    padding: 24,
-    flex: 1,
-    backgroundColor: COLORS.white,
-  },
-  logoImage: {
-    height: 150,
-    width: 150,
-    alignSelf: 'center',
-    marginTop: 50,
-  },
-  title: {
-    ...FONTS.h2,
-    textAlign: 'center',
-    paddingTop: 20,
-    color: COLORS.black,
-  },
-
-  subTitle: {
-    fontSize: 17,
-    textAlign: 'center',
-    paddingVertical: 20,
-    fontWeight: '500',
-  },
-
-  form: {
-    paddingTop: 20,
-  },
-  createSection: {
-    marginTop: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // flexDirection: 'row',
-  },
-  linkBtn: {
-    marginTop: 7,
-    color: COLORS.primary,
-    ...FONTS.h3,
-  },
-
-  infoText: {
-    ...FONTS.body3,
-  },
-});
