@@ -1,5 +1,6 @@
-import {StyleSheet, Text, TouchableOpacity, Image, View} from 'react-native';
 import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {COLORS, FONTS, icons, SIZES} from '../../../themes';
 
 export default function PopularCard({item, navigation}) {
@@ -22,12 +23,8 @@ export default function PopularCard({item, navigation}) {
 
           {/* Book Info */}
           <View style={styles.wrapInfo}>
-            <Image
-              source={icons.page_filled_icon}
-              resizeMode="contain"
-              style={styles.iconPublisher}
-            />
-            <Text style={styles.textInfo}>{item.average_rating}</Text>
+            <Icon name="star" size={15} color={COLORS.rating} />
+            <Text style={styles.textInfo}>{item.average_rating + '/10'}</Text>
 
             <Image
               source={icons.read_icon}
@@ -64,7 +61,11 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
   author: {...FONTS.h4, color: COLORS.lightGray3},
-  wrapInfo: {flexDirection: 'row', marginTop: SIZES.radius},
+  wrapInfo: {
+    flexDirection: 'row',
+    marginTop: SIZES.radius,
+    alignItems: 'center',
+  },
   iconPublisher: {
     width: 20,
     height: 20,
