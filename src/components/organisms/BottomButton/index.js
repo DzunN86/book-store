@@ -16,7 +16,7 @@ export default function BottomButton({price, bookTitle}) {
     configure();
     buatChannel('1');
     cancelAllLocalNotifications();
-    kirimNotifikasi('1', `You Love ${bookTitle}`, 'Terima Kasih');
+    kirimNotifikasi('1', `Kamu Menyukai ${bookTitle}`, 'Terima Kasih');
   };
   return (
     <View style={styles.container}>
