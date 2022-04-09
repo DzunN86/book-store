@@ -1,9 +1,11 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import IconFW from 'react-native-vector-icons/FontAwesome5';
 import {COLORS, FONTS, icons, SIZES} from '../../../themes';
 
 export default function PopularCard({item, navigation}) {
+  const hargaConvert = `Rp. ${parseFloat(item.price).toLocaleString('id-ID')}`;
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.cardWrapper} onPress={navigation}>
@@ -26,12 +28,11 @@ export default function PopularCard({item, navigation}) {
             <Icon name="star" size={15} color={COLORS.rating} />
             <Text style={styles.textInfo}>{item.average_rating + '/10'}</Text>
 
-            <Image
-              source={icons.read_icon}
-              resizeMode="contain"
-              style={styles.iconPublisher}
-            />
+            <IconFW name="stopwatch" size={15} color={COLORS.lightGray3} />
             <Text style={styles.textInfo}>{item.price}</Text>
+          </View>
+          <View style={styles.wrapInfo}>
+            <Text style={styles.priceText}>{hargaConvert}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -73,8 +74,13 @@ const styles = StyleSheet.create({
   },
   textInfo: {
     ...FONTS.body4,
-    color: COLORS.lightGray,
+    color: COLORS.lightGray3,
     paddingHorizontal: SIZES.radius,
+  },
+  priceText: {
+    ...FONTS.h3,
+    color: COLORS.lightGray2,
+    alignSelf: 'flex-end',
   },
   wrapperBookmark: {position: 'absolute', top: 5, right: 15},
   iconBookmark: {

@@ -13,19 +13,20 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {HeaderUser, PopularCard, RecomCard} from '../../components';
-import {fetchBook} from '../../store/actions';
+import {fetchBook, fetchBookPop} from '../../store/actions';
 import {REFRESH_BOOK} from '../../store/types';
 import {COLORS, FONTS, images, SIZES} from '../../themes';
 
 export default function Home({navigation}) {
   const dispatch = useDispatch();
 
-  const {books, isRefreshing, isLoading} = useSelector(
+  const {books, isRefreshing, isLoading, booksPop} = useSelector(
     state => state.bookReducer,
   );
 
   useEffect(() => {
     dispatch(fetchBook());
+    dispatch(fetchBookPop());
   }, [dispatch]);
 
   function latestSort(a, b) {
@@ -41,6 +42,7 @@ export default function Home({navigation}) {
   const onRefresh = () => {
     dispatch({type: REFRESH_BOOK});
     dispatch(fetchBook());
+    dispatch(fetchBookPop());
   };
 
   function renderWentWrong() {
@@ -104,7 +106,7 @@ export default function Home({navigation}) {
           </View>
           {/* Books */}
           <View style={styles.listPopuler}>
-            {books.sort(AverageRatingSort).map((item, index) => {
+            {booksPop.map((item, index) => {
               return (
                 <PopularCard
                   item={item}

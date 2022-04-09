@@ -18,3 +18,7 @@ export const LOADING_BOOK = '@@LOADING_BOOK';
 export const SET_ERROR = '@@SET_ERROR';
 export const REFRESH_BOOK = '@@REFRESH_BOOK';
 export const REMOVE_BOOK = '@@REMOVE_BOOK';
+
+export const SET_POP_BOOK = '@@SET_POP_BOOK';
+export const POP_BOOK_LOADING = '@@POP_BOOK_LOADING';
+export const POP_BOOK_ERROR = '@@POP_BOOK_ERROR';
