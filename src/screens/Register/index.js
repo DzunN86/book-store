@@ -1,41 +1,24 @@
 import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Header, Input} from '../../components';
-import {useForm} from '../../hooks';
 import {registerAction} from '../../store/actions';
 import {COLORS} from '../../themes';
-import {showMessage} from '../../utils';
+import {EMAIL_REGEX, PASSWORD_REGEX} from '../../utils';
 import styles from './styles';
 
 export default function Register({navigation}) {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const {isLoading} = useSelector(state => state.globalReducer);
-  const [form, setForm] = useForm({
-    name: '',
-    email: '',
-    password: '',
-  });
+
+  const {control, handleSubmit} = useForm();
 
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
-    if (form.email === '' || form.email === '' || form.password === '') {
-      let inputName = [];
-      if (!form.name) {
-        inputName.push('Full Name');
-      }
-      if (!form.email) {
-        inputName.push('Email');
-      }
-      if (!form.password) {
-        inputName.push('Password');
-      }
-      showMessage(`Harap melengkapi ${inputName.join(', ')}`);
-    } else {
-      dispatch(registerAction(form, navigation));
-    }
+  const onSubmit = data => {
+    dispatch(registerAction(data, navigation));
   };
   return (
     <ScrollView contentContainerStyle={styles.scroll}>
@@ -49,22 +32,44 @@ export default function Register({navigation}) {
           <View>
             <Input
               label="Full Name"
+              name="name"
               iconPosition="right"
-              placeholder="Full Name"
-              value={form.name}
-              onChangeText={value => setForm('name', value)}
+              placeholder="Enter Full Name"
+              control={control}
+              rules={{
+                required: 'Name is required',
+              }}
             />
             <Input
               label="Email"
+              name="email"
               iconPosition="right"
               placeholder="Enter Email"
-              value={form.email}
-              onChangeText={value => setForm('email', value)}
+              control={control}
+              rules={{
+                required: 'Email is required',
+                pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
+              }}
             />
             <Input
               label="Password"
+              name={'password'}
               iconPosition="right"
               secureTextEntry={isSecureEntry}
+              control={control}
+              rules={{
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters',
+                },
+                pattern: {
+                  value: PASSWORD_REGEX,
+                  message:
+                    'Password must be contain at least 1 letter and 1 number',
+                },
+              }}
+              placeholder="Enter Password"
               icon={
                 <TouchableOpacity
                   onPress={() => {
@@ -77,15 +82,12 @@ export default function Register({navigation}) {
                   />
                 </TouchableOpacity>
               }
-              placeholder="Enter Password"
-              value={form.password}
-              onChangeText={value => setForm('password', value)}
             />
 
             <Button
               primary
               title="Register"
-              onPress={onSubmit}
+              onPress={handleSubmit(onSubmit)}
               loading={isLoading}
               disabled={isLoading}
             />

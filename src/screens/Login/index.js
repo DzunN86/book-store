@@ -1,37 +1,24 @@
 import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Input} from '../../components';
-import {useForm} from '../../hooks';
 import {loginAction} from '../../store/actions';
 import {COLORS, images} from '../../themes';
-import {showMessage} from '../../utils';
+import {EMAIL_REGEX, PASSWORD_REGEX} from '../../utils';
 import styles from './styles';
 
 export default function Login({navigation}) {
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const {isLoading} = useSelector(state => state.globalReducer);
-  const [form, setForm] = useForm({
-    email: '',
-    password: '',
-  });
+
+  const {control, handleSubmit} = useForm();
 
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
-    if (form.email === '' || form.password === '') {
-      let inputName = [];
-      if (!form.email) {
-        inputName.push('email');
-      }
-      if (!form.password) {
-        inputName.push('password');
-      }
-      showMessage(`Harap melengkapi ${inputName.join(' dan ')}`);
-    } else {
-      dispatch(loginAction(form));
-    }
+  const onSubmit = data => {
+    dispatch(loginAction(data));
   };
 
   return (
@@ -49,17 +36,34 @@ export default function Login({navigation}) {
           <View style={styles.form}>
             <Input
               label="Email"
+              name="email"
               iconPosition="right"
               placeholder="Enter Email"
-              value={form.email}
-              onChangeText={value => setForm('email', value)}
+              control={control}
+              rules={{
+                required: 'Email is required',
+                pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
+              }}
             />
             <Input
               label="Password"
+              name={'password'}
               iconPosition="right"
               secureTextEntry={isSecureEntry}
-              value={form.password}
-              onChangeText={value => setForm('password', value)}
+              control={control}
+              rules={{
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters',
+                },
+                pattern: {
+                  value: PASSWORD_REGEX,
+                  message:
+                    'Password must be contain at least 1 letter and 1 number',
+                },
+              }}
+              placeholder="Enter Password"
               icon={
                 <TouchableOpacity
                   onPress={() => {
@@ -72,13 +76,12 @@ export default function Login({navigation}) {
                   />
                 </TouchableOpacity>
               }
-              placeholder="Enter Password"
             />
 
             <Button
               primary
               title="Login"
-              onPress={onSubmit}
+              onPress={handleSubmit(onSubmit)}
               loading={isLoading}
               disabled={isLoading}
             />
