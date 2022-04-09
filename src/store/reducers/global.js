@@ -1,7 +1,8 @@
-import {SET_LOADING} from '../types';
+import {SET_LOADING, SET_ONLINE} from '../types';
 
 const initGlobalState = {
   isLoading: false,
+  isOnline: true,
 };
 
 export const globalReducer = (state = initGlobalState, action) => {
@@ -10,6 +11,11 @@ export const globalReducer = (state = initGlobalState, action) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case SET_ONLINE:
+      return {
+        ...state,
+        isOnline: action.payload,
       };
     default:
       return state;
