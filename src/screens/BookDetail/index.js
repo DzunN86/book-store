@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {BookDesc, BookInfo, BottomButton, Loading} from '../../components';
 import {fetchDetailBook} from '../../store/actions';
@@ -48,7 +48,10 @@ export default function BookDetail({navigation, route}) {
 
           {/* Buttons */}
           <View style={styles.btnBottom}>
-            <BottomButton price={detailBook.price} />
+            <BottomButton
+              price={detailBook.price}
+              bookTitle={detailBook.title}
+            />
           </View>
         </View>
       )}
